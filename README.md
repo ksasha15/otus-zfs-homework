@@ -1,5 +1,6 @@
 # otus-zfs-homework
 
+
 root@u24:~# apt install zfsutils-linux
 Reading package lists... Done
 Building dependency tree... Done
@@ -75,6 +76,9 @@ No containers need to be restarted.
 No user sessions are running outdated binaries.
 
 No VM guests are running outdated hypervisor (qemu) binaries on this host.
+
+Определение алгоритма с наилучшим сжатием
+
 root@u24:~#
 root@u24:~# zpool create otus1 mirror /dev/sdb /dev/sdc
 root@u24:~# zpool create otus2 mirror /dev/sdd /dev/sde
@@ -277,6 +281,9 @@ drwx------  3 root root    4096 Jan 28 16:16 .config/
 drwx------  2 root root    4096 Jan 25 14:52 .ssh/
 -rw-------  1 root root    2056 Jan 28 16:42 .viminfo
 root@u24:~#
+
+ Определение настроек пула
+
 root@u24:~# tar -xzvf archive.tar.gz
 zpoolexport/
 zpoolexport/filea
@@ -407,4 +414,40 @@ otus  compression  zle             local
 root@u24:~# zfs get checksum otus
 NAME  PROPERTY  VALUE      SOURCE
 otus  checksum  sha256     local
+root@u24:~#
+
+Работа со снапшотом, поиск сообщения от преподавателя
+
+root@u24:~# wget -O otus_task2.file --no-check-certificate https://drive.usercontent.google.com/download?id=1wgxjih8YZ-cqLqaZVa0lA3h3Y029c3oI&export=download
+[1] 3827
+root@u24:~#
+Redirecting output to ‘wget-log’.
+
+[1]+  Done                    wget -O otus_task2.file --no-check-certificate https://drive.usercontent.google.com/download?id=1wgxjih8YZ-cqLqaZVa0lA3h3Y029c3oI
+root@u24:~# ll
+total 12464
+drwx------  5 root root    4096 Feb  1 03:08 ./
+drwxr-xr-x 29 root root    4096 Feb  1 02:57 ../
+-rw-r--r--  1 root root    3979 Feb  1 01:50 1
+-rw-r--r--  1 root root       0 Feb  1 01:42 2
+-rw-r--r--  1 root root 7275140 Dec  6  2023 archive.tar.gz
+-rw-------  1 root root    1467 Jan 28 16:43 .bash_history
+-rw-r--r--  1 root root    3106 Apr 22  2024 .bashrc
+drwx------  3 root root    4096 Jan 28 16:16 .config/
+-rw-------  1 root root      80 Feb  1 02:46 .lesshst
+-rw-r--r--  1 root root 5432736 Dec  6  2023 otus_task2.file
+-rw-r--r--  1 root root     161 Apr 22  2024 .profile
+drwx------  2 root root    4096 Jan 25 14:52 .ssh/
+-rw-------  1 root root    2056 Jan 28 16:42 .viminfo
+-rw-r--r--  1 root root    1597 Feb  1 03:08 wget-log
+drwxr-xr-x  2 root root    4096 May 15  2020 zpoolexport/
+root@u24:~# zfs receive otus/test@today < otus
+otus            otus@           otus/hometask2
+root@u24:~# zfs receive otus/test@today < otus_task2.file
+root@u24:~#
+root@u24:~# find /otus/test/ -name "secret_message"
+/otus/test/task1/file_mess/secret_message
+root@u24:~# cat /otus/test/task1/file_mess/secret_message
+https://otus.ru/lessons/linux-hl/
+
 root@u24:~#
