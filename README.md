@@ -1,6 +1,6 @@
 # otus-zfs-homework
 
-
+```
 root@u24:~# apt install zfsutils-linux
 Reading package lists... Done
 Building dependency tree... Done
@@ -451,3 +451,4 @@ root@u24:~# cat /otus/test/task1/file_mess/secret_message
 https://otus.ru/lessons/linux-hl/
 
 root@u24:~#
+```
